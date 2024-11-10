@@ -59,3 +59,55 @@ def check_diagonal(board):
         return True
 
 def check_if_win(board):
+    global game_running
+    if check_horizontal(board):
+        display_board(board)
+        print(f"The winner is {winner}!")
+        game_running = False
+
+    elif check_horizontal(board):
+        display_board(board)
+        print(f"The winner is {winner}!")
+        game_running = False
+
+    elif check_diagonal(board):
+        display_board(board)
+        print(f"The winner is {winner}!")
+        game_running = False
+
+
+def check_if_tie(board):
+    global game_running
+    if "-" not in board:
+        display_board(board)
+        print("It is a tie!")
+        game_running = False
+
+
+# switch player
+def switch_player():
+    global current_player
+    if current_player == "X":
+        current_player = "O"
+    else:
+        current_player = "X"
+
+
+def computer(board):
+    while current_player == "O":
+        position = random.randint(0, 8)
+        if board[position] == "-":
+            board[position] = "O"
+            switch_player()
+
+
+while game_running:
+    display_board(board)
+    player_input(board)
+    check_if_win(board)
+    check_if_tie(board)
+    switch_player()
+    computer(board)
+    check_if_win(board)
+    check_if_tie(board)
+
